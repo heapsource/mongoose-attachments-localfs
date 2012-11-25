@@ -1,36 +1,32 @@
-## mongoose-attachments-knox
+## mongoose-attachments-localfs
 
-S3 Storage Provider for [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments) backed by [Knox](https://github.com/LearnBoost/knox).
+Simple File System Storage Provider for [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
 
 ### Installation
 
-    $ npm install mongoose-attachments-knox
+    $ npm install mongoose-attachments-localfs
 
 ### Usage
 
 The library will register automatically with `mongoose-attachments` by performing `require`:
 
-    require('mongoose-attachments-knox')
+    require('mongoose-attachments-localfs')
+
+
+This 'provider' stores the images created via mongoose-attachments in the local file system.
+It requires that the option 'directory' points to the absolute path of the directory where it will create subfolders per image type.
+
+Example: type is `thumb` and `directory` points to `/path/to/public/images/`
+When storing data into the schema, the thumbnail created by mongoose-attachemnts is stored as `/path/to/public/images/thumb/<ObjectID>-thumb.<format>`.
+The absolute path to the image is stored in `Model.image.<type>.path`.
 
 For further instructions check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
 
 ### Provider Configuration
 #### Provider Name:
 
-    knox-s3
+    fs
 
-> Note: This module was the original Amazon S3 provider in `mongoose-attachments`, back then the provider name was just `s3`, it was now renamed to `knox-s3`.
-
-#### Configuration properties
-
-    providerName: 'knox-s3',
-    options: {
-      key: '<key>',
-      secret: '<secret>',
-      bucket: '<bucket>'
-    }
-
-For other configurations check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
 
 ### Contributors
 
@@ -39,7 +35,7 @@ For other configurations check [mongoose-attachments](https://github.com/firebas
 
 ## License (MIT)
 
-Copyright (c) 2011-2012 Firebase.co - http://firebase.co
+Copyright (c) 2012 IT Agenten - http://www.it-agenten.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
