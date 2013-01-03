@@ -25,7 +25,7 @@ For further instructions check [mongoose-attachments](https://github.com/firebas
 ### Provider Configuration
 #### Provider Name:
 
-    fs
+    localfs
 
 
 ### Contributors
