@@ -2,6 +2,12 @@
   "author": "Firebase.co <npm@firebase.co> (http://www.firebase.co/)",
   "name": "mongoose-attachments-localfs",
   "description": "Simple File System Storage Provider for mongoose-attachments",
+  "contributors": [ 
+    {
+      "name": "Chantal Ackermann (IT:Agenten GmbH)",
+      "url": "http://www.it-agenten.com"
+    } 
+  ],
   "version": "0.1.0",
   "homepage": "https://github.com/firebaseco/mongoose-attachments-localfs",
   "repository": {
