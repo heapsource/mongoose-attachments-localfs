@@ -12,30 +12,37 @@ The library will register automatically with `mongoose-attachments` by performin
 
     require('mongoose-attachments-localfs')
 
-
-This 'provider' stores the images created via mongoose-attachments in the local file system.
-It requires that the option 'directory' points to the absolute path of the directory where it will create subfolders per image type.
-
-Example: type is `thumb` and `directory` points to `/path/to/public/images/`
-When storing data into the schema, the thumbnail created by mongoose-attachemnts is stored as `/path/to/public/images/thumb/<ObjectID>-thumb.<format>`.
-The absolute path to the image is stored in `Model.image.<type>.path`.
-
 For further instructions check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
 
-### Provider Configuration
-#### Provider Name:
+### Provider Name
 
-    fs
+    localfs
 
+### Example
+
+The following snippet extends PhotoSchema to use mongoose-attachments and localte all the uploads in public directory, perfectly suited for [Express.js](http://expressjs.com) applications:
+
+    PhotoSchema.plugin(require('mongoose-attachments'), {
+      directory: path.join(__dirname, "public"),
+      providerName: 'localfs'
+    }
+
+For other configurations check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
+
+### More Details
+
+If you define a style called `thumb` and `directory` points to `<web-app-dir>/public/images`
+When storing data into the schema, the thumbnail created by mongoose-attachemnts is stored as `<web-app-dir>/public/images/thumb/<ObjectID>-thumb.<format>`.
+The absolute path to the image is stored in `Model.image.<type>.path`.
 
 ### Contributors
 
-* [Johan Hernandez](https://github.com/thepumpkin1979)
+* [Firebase.co](https://github.com/firebaseco)
 * [Chantal Ackermann](https://github.com/nuarhu)
 
 ## License (MIT)
 
-Copyright (c) 2012 IT Agenten - http://www.it-agenten.com
+Copyright (c) 2012-2013 IT Agenten - http://www.it-agenten.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
