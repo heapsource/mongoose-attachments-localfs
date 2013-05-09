@@ -9,7 +9,7 @@ Simple File System Storage Provider for [mongoose-attachments](https://github.co
 ### Usage
 
 The library will register automatically with `mongoose-attachments` by performing `require` and
-returns a reference to the mongoose-attachments plugin:
+return a reference to the mongoose-attachments plugin:
 
     var attachments = require('mongoose-attachments-localfs');
 
