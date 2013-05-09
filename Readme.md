@@ -13,29 +13,69 @@ returns a reference to the mongoose-attachments plugin:
 
     var attachments = require('mongoose-attachments-localfs');
 
-This 'provider' stores the images created via mongoose-attachments in the local file system.
-It requires that the option 'directory' points to the absolute path of the directory where it will create subfolders per image type.
-
-Example: type is `thumb` and `directory` points to `/path/to/public/images/`
-When storing data into the schema, the thumbnail created by mongoose-attachemnts is stored as `/path/to/public/images/thumb/<ObjectID>-thumb.<format>`.
-The absolute path to the image is stored in `Model.image.<type>.path`.
-
 For further instructions check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
 
-### Provider Configuration
-#### Provider Name:
+### Provider Name
 
     localfs
 
+### Example
+
+The following snippet extends PhotoSchema to use mongoose-attachments and locate all the uploads in public directory, perfectly suited for [Express.js](http://expressjs.com) applications:
+
+    var path = require('path');
+    var attachments = require('mongoose-attachments-localfs');
+    
+    MySchema.plugin(attachments, {
+        directory: '/absolute/path/to/public/images',
+        storage : {
+            providerName: 'localfs'
+        },
+        properties: {
+            image: {
+                styles: {
+                    original: {
+                        // keep the original file
+                    },
+                    thumb: {
+                        thumbnail: '100x100^',
+                        gravity: 'center',
+                        extent: '100x100',
+                        '$format': 'jpg'
+                    },
+                    detail: {
+                        resize: '400x400>',
+                        '$format': 'jpg'
+                    }
+                }
+            }
+        }
+    });
+    MySchema.virtual('detail_img').get(function() {
+        return path.join('detail', path.basename(this.image.detail.path));
+    });
+    MySchema.virtual('thumb_img').get(function() {
+        return path.join('thumb', path.basename(this.image.thumb.path));
+    });
+
+The URL to the images would then be `http://<your host>/<mount path>/images` prepended to the value of `MyModel.detail_img` and `MyModel.thumb_img`.
+
+For other configurations check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
+
+### More Details
+
+If you define a style called `thumb` and `directory` points to `<web-app-dir>/public/images`
+When storing data into the schema, the thumbnail created by mongoose-attachemnts is stored as `<web-app-dir>/public/images/thumb/<ObjectID>-thumb.<format>`.
+The absolute path to the image is stored in `Model.image.<type>.path`.
 
 ### Contributors
 
-* [Johan Hernandez](https://github.com/thepumpkin1979)
+* [Firebase.co](https://github.com/firebaseco)
 * [Chantal Ackermann](https://github.com/nuarhu)
 
 ## License (MIT)
 
-Copyright (c) 2012 IT Agenten - http://www.it-agenten.com
+Copyright (c) 2012-2013 IT Agenten - http://www.it-agenten.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
