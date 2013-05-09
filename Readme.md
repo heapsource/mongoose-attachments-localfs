@@ -8,9 +8,10 @@ Simple File System Storage Provider for [mongoose-attachments](https://github.co
 
 ### Usage
 
-The library will register automatically with `mongoose-attachments` by performing `require`:
+The library will register automatically with `mongoose-attachments` by performing `require` and
+return a reference to the mongoose-attachments plugin:
 
-    require('mongoose-attachments-localfs')
+    var attachments = require('mongoose-attachments-localfs');
 
 For further instructions check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
 
@@ -20,12 +21,44 @@ For further instructions check [mongoose-attachments](https://github.com/firebas
 
 ### Example
 
-The following snippet extends PhotoSchema to use mongoose-attachments and localte all the uploads in public directory, perfectly suited for [Express.js](http://expressjs.com) applications:
+The following snippet extends PhotoSchema to use mongoose-attachments and locate all the uploads in public directory, perfectly suited for [Express.js](http://expressjs.com) applications:
 
-    PhotoSchema.plugin(require('mongoose-attachments'), {
-      directory: path.join(__dirname, "public"),
-      providerName: 'localfs'
-    }
+    var path = require('path');
+    var attachments = require('mongoose-attachments-localfs');
+    
+    MySchema.plugin(attachments, {
+        directory: '/absolute/path/to/public/images',
+        storage : {
+            providerName: 'localfs'
+        },
+        properties: {
+            image: {
+                styles: {
+                    original: {
+                        // keep the original file
+                    },
+                    thumb: {
+                        thumbnail: '100x100^',
+                        gravity: 'center',
+                        extent: '100x100',
+                        '$format': 'jpg'
+                    },
+                    detail: {
+                        resize: '400x400>',
+                        '$format': 'jpg'
+                    }
+                }
+            }
+        }
+    });
+    MySchema.virtual('detail_img').get(function() {
+        return path.join('detail', path.basename(this.image.detail.path));
+    });
+    MySchema.virtual('thumb_img').get(function() {
+        return path.join('thumb', path.basename(this.image.thumb.path));
+    });
+
+The URL to the images would then be `http://<your host>/<mount path>/images` prepended to the value of `MyModel.detail_img` and `MyModel.thumb_img`.
 
 For other configurations check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
 
