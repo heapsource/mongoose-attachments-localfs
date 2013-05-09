@@ -8,10 +8,10 @@ Simple File System Storage Provider for [mongoose-attachments](https://github.co
 
 ### Usage
 
-The library will register automatically with `mongoose-attachments` by performing `require`:
+The library will register automatically with `mongoose-attachments` by performing `require` and
+returns a reference to the mongoose-attachments plugin:
 
-    require('mongoose-attachments-localfs')
-
+    var attachments = require('mongoose-attachments-localfs');
 
 This 'provider' stores the images created via mongoose-attachments in the local file system.
 It requires that the option 'directory' points to the absolute path of the directory where it will create subfolders per image type.
