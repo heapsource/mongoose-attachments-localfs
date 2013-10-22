@@ -19,10 +19,12 @@ describe('testing localfs-provider', function() {
 
 	it('path', function(done) {
     var self = this;
+    var imageProperty = {};
     var obj = { 
+      image: imageProperty,
       add: function(op) {
-        console.log(op); 
-        self[op] = op;
+        imageProperty[op] = op;
+        obj[op] = op;
       }, 
       methods: {}
     }
@@ -42,7 +44,7 @@ describe('testing localfs-provider', function() {
             }
         }
     });
-    obj.methods.attach('image', {path: self.test_file_path}, done);
+    obj.methods.attach.call(obj, 'image', {path: self.test_file_path}, done);
 	});
 
   afterEach(function() {
