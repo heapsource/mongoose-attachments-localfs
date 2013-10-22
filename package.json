@@ -17,7 +17,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "mongoose-attachments": "0.1.x"
+    "mongoose-attachments": "git://github.com:letsface/mongoose-attachments.git#letsface"
   },
   "engines": {
     "node": "*"
