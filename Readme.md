@@ -1,3 +1,9 @@
+DUMMY CHANGE, DON'T MERGE!
+
+NOTE: this is Letsface's fork of heapsource project with some customized changes
+
+[![Build Status](http://letsface.dnsd.me:8080/buildStatus/icon?job=mongoose-attachments-localfs)](http://letsface.dnsd.me:8080/view/All/job/mongoose-attachments-localfs/)
+
 ## mongoose-attachments-localfs
 
 Simple File System Storage Provider for [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
