@@ -24,12 +24,16 @@ For further instructions check [mongoose-attachments](https://github.com/firebas
 The following snippet extends PhotoSchema to use mongoose-attachments and locate all the uploads in public directory, perfectly suited for [Express.js](http://expressjs.com) applications:
 
     var path = require('path');
+    var os = require('os');
     var attachments = require('mongoose-attachments-localfs');
     
     MySchema.plugin(attachments, {
-        directory: '/absolute/path/to/public/images',
+        directory: os.tmpdir(),
         storage : {
-            providerName: 'localfs'
+            providerName: 'localfs',
+            options: {
+                directory: '/absolute/path/to/public/images'
+            }
         },
         properties: {
             image: {
