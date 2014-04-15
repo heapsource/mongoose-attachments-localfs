@@ -26,7 +26,7 @@
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha"
   },
   "dependencies": {
-    "mongoose-attachments": "0.1.x"
+    "mongoose-attachments": "git://github.com/letsface/mongoose-attachments.git#letsface"
   },
   "devDependencies": {
     "mocha": "^1.18",
@@ -41,7 +41,7 @@
     "test": "node_modules/mocha/bin/mocha tests/*-test.js"
   },  
   "devDependencies": {
-    "temp": "~0.6.0",
-    "mocha": "~1.13.0"
+    "mocha": "~1.13.0",
+    "mockery": "~1.4.0"
   }
 }

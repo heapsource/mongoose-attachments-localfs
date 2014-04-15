@@ -1,5 +1,9 @@
 var attachments = require('../lib/localfs-provider.js');
 
+var mockery = require('mockery');
+var assert =  require('assert');
+
+
 var path = require('path');
 var temp = require('temp');
 var fs = require('fs');
@@ -49,5 +53,5 @@ describe('testing localfs-provider', function() {
 
   afterEach(function() {
     temp.cleanup();
-  })
+  });
 });
