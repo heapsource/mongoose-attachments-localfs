@@ -2,7 +2,13 @@
   "author": "Firebase.co <npm@firebase.co> (http://www.firebase.co/)",
   "name": "mongoose-attachments-localfs",
   "description": "Simple File System Storage Provider for mongoose-attachments",
-  "keywords": ["mongoose", "s3", "imagemagick", "uploads", "attachments"],
+  "keywords": [
+    "mongoose",
+    "s3",
+    "imagemagick",
+    "uploads",
+    "attachments"
+  ],
   "contributors": [
     {
       "name": "Chantal Ackermann (IT:Agenten GmbH)",
@@ -30,5 +36,12 @@
   },
   "engines": {
     "node": "*"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha tests/*-test.js"
+  },  
+  "devDependencies": {
+    "temp": "~0.6.0",
+    "mocha": "~1.13.0"
   }
 }
