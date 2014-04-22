@@ -25,10 +25,8 @@
   "scripts": {
     "test": "node_modules/mocha/bin/mocha tests/*-test.js"
   },
-  "dependencies": {
-    "mongoose-attachments": "latest"
-  },
   "devDependencies": {
+    "mongoose-attachments": "latest",
     "istanbul": "^0.2",
     "mocha": "~1.13.0",
     "mockery": "~1.4.0",
