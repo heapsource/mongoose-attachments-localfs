@@ -23,25 +23,18 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha"
-  },
-  "dependencies": {
-    "mongoose-attachments": "git://github.com/letsface/mongoose-attachments.git#letsface"
+    "test": "node_modules/mocha/bin/mocha tests/*-test.js"
   },
   "devDependencies": {
-    "mocha": "^1.18",
-    "should": "^3.2",
+    "mongoose-attachments": "latest",
+    "istanbul": "^0.2",
+    "mocha": "~1.13.0",
+    "mockery": "~1.4.0",
     "mongoose": "^3.8",
-    "istanbul": "^0.2"
+    "should": "3.2",
+    "temp": "^0.7.0"
   },
   "engines": {
     "node": "*"
-  },
-  "scripts": {
-    "test": "node_modules/mocha/bin/mocha tests/*-test.js"
-  },  
-  "devDependencies": {
-    "mocha": "~1.13.0",
-    "mockery": "~1.4.0"
   }
 }
