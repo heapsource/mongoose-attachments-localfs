@@ -1,57 +1,38 @@
 var attachments = require('../lib/localfs-provider.js');
 
-var mockery = require('mockery');
-var assert =  require('assert');
+var os     = require('os');
+var path   = require('path');
+var should = require('should');
 
-
-var path = require('path');
-var temp = require('temp');
-var fs = require('fs');
-
-temp.track();
+var Bar = require(path.resolve(__dirname, './fixtures/StubSchemaWithOverriddenDirectory'));
+var Foo = require(path.resolve(__dirname, './fixtures/StubSchema'));
 
 describe('testing localfs-provider', function() {
-  beforeEach(function(done) {    
-    var self = this;
-    temp.mkdir('output', function(err, dir) {
-      self.dir = dir;
-      self.source = path.join(__dirname, '1x1-pixel.png');
-      self.test_file_path = path.join(self.dir, '1x1-pixel.png');
-      fs.createReadStream(self.source).pipe(fs.createWriteStream(self.test_file_path)).on('close', done);
+  it('should move an attachment to a specified directory', function (done) {
+    var foo = new Foo();
+    foo.attach('image', {
+      path: path.resolve(__dirname, './fixtures/node_js_logo.png')
+    }, function(error) {
+      if(error) throw error;
+
+      foo.image.image.path.should.startWith(os.tmpdir());
+
+      done();
     });
-  })
+  });
 
-	it('path', function(done) {
-    var self = this;
-    var imageProperty = {};
-    var obj = { 
-      image: imageProperty,
-      add: function(op) {
-        imageProperty[op] = op;
-        obj[op] = op;
-      }, 
-      methods: {}
-    }
+  it('should use a separate directory for temporary files', function (done) {
+    var bar = new Bar();
+    bar.attach('image', {
+      path: path.resolve(__dirname, './fixtures/node_js_logo.png')
+    }, function(error) {
+      if(error) throw error;
 
-    var a = new attachments(obj, {
-        directory: self.dir,
-        storage : {
-            providerName: 'localfs'
-        },
-        properties: {
-            image: {
-                styles: {
-                    original: {
-                        // keep the original file
-                    }
-                }
-            }
-        }
+      // the Bar schema uses os.tmpdir() for imagemagick temporary files and
+      // os.tmpdir() + '/localfs-test' for the output directory
+      path.dirname(bar.image.image.path).should.not.equal(os.tmpdir());
+
+      done();
     });
-    obj.methods.attach.call(obj, 'image', {path: self.test_file_path}, done);
-	});
-
-  afterEach(function() {
-    temp.cleanup();
   });
 });
