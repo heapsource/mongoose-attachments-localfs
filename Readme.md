@@ -1,10 +1,6 @@
-NOTE: this is Letsface's fork of heapsource project with some customized changes
-
-[![Build Status](http://letsface.dnsd.me:8080/buildStatus/icon?job=mongoose-attachments-localfs)](http://letsface.dnsd.me:8080/view/All/job/mongoose-attachments-localfs/)
-
 ## mongoose-attachments-localfs
 
-Simple File System Storage Provider for [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
+Simple File System Storage Provider for [mongoose-attachments](https://github.com/heapsource/mongoose-attachments).
 
 ### Installation
 
@@ -17,7 +13,7 @@ return a reference to the mongoose-attachments plugin:
 
     var attachments = require('mongoose-attachments-localfs');
 
-For further instructions check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
+For further instructions check [mongoose-attachments](https://github.com/heapsource/mongoose-attachments).
 
 ### Provider Name
 
@@ -68,7 +64,7 @@ The following snippet extends PhotoSchema to use mongoose-attachments and locate
 
 The URL to the images would then be `http://<your host>/<mount path>/images` prepended to the value of `MyModel.detail_img` and `MyModel.thumb_img`.
 
-For other configurations check [mongoose-attachments](https://github.com/firebaseco/mongoose-attachments).
+For other configurations check [mongoose-attachments](https://github.com/heapsource/mongoose-attachments).
 
 ### More Details
 
@@ -78,12 +74,13 @@ The absolute path to the image is stored in `Model.image.<type>.path`.
 
 ### Contributors
 
-* [Firebase.co](https://github.com/firebaseco)
+* [Bithavoc.io](https://github.com/bithavoc)
 * [Chantal Ackermann](https://github.com/nuarhu)
+* [Trevor McLeod](https://github.com/trevormcleod)
 
 ## License (MIT)
 
-Copyright (c) 2012-2013 IT Agenten - http://www.it-agenten.com
+Copyright (c) 2012-2014 IT Agenten - http://www.it-agenten.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
